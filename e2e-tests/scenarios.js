@@ -1,42 +1,73 @@
 'use strict';
 
-/* https://github.com/angular/protractor/blob/master/docs/toc.md */
+/* Assignment #1 End-to-End Testing
+ * Prepared By: Len Payne
+ * For: CPD-3262
+ * 2014/01/07
+ */
+/* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
 
-describe('my app', function() {
+describe('Contact List App', function() {
 
-  browser.get('index.html');
-
-  it('should automatically redirect to /view1 when location hash/fragment is empty', function() {
-    expect(browser.getLocationAbsUrl()).toMatch("/view1");
+  beforeEach(function() {
+    browser().navigateTo('app/index.html');
   });
 
-
-  describe('view1', function() {
-
-    beforeEach(function() {
-      browser.get('index.html#/view1');
-    });
-
-
-    it('should render view1 when user navigates to /view1', function() {
-      expect(element.all(by.css('[ng-view] p')).first().getText()).
-        toMatch(/partial for view 1/);
-    });
-
+  it('should have four tr elements with the class "contact"', function() {
+	expect(repeater('tr.contact').count()).toBe(4);
+  });
+  
+  it('should filter on Cooper to only two results', function() {
+	input('query').enter('Cooper');
+    expect(repeater('tr.contact').count()).toBe(2);
   });
 
-
-  describe('view2', function() {
-
-    beforeEach(function() {
-      browser.get('index.html#/view2');
-    });
-
-
-    it('should render view2 when user navigates to /view2', function() {
-      expect(element.all(by.css('[ng-view] p')).first().getText()).
-        toMatch(/partial for view 2/);
-    });
-
+  it('should filter on o to only three results', function() {
+	input('query').enter('o');
+    expect(repeater('tr.contact').count()).toBe(3);
   });
+
+  it('should order correctly by Extension', function() {
+	input('query').enter('33');
+	select('orderProp').option('Extension');
+	expect(repeater('tr.contact', 'Contact List').column('contact.first')).
+          toEqual(["Liane", "Rick"]);
+  });
+
+  it('should order correctly by First Name', function() {
+	input('query').enter('Cooper');
+	select('orderProp').option('First Name');
+	expect(repeater('tr.contact', 'Contact List').column('contact.first')).
+          toEqual(["Jim", "Liane"]);
+  });
+
+  it('should order correctly by Last Name', function() {
+	input('query').enter('L');
+	select('orderProp').option('Last Name');
+	expect(repeater('tr.contact', 'Contact List').column('contact.first')).
+          toEqual(["Liane", "Len"]);
+  });
+
+  it('should include all the original first names', function() {
+	select('orderProp').option('First Name');
+	expect(repeater('tr.contact', 'Contact List').column('contact.first')).
+          toEqual(["Jim", "Len", "Liane", "Rick"]);		
+  });
+  
+  it('should include all the original last names', function() {
+	select('orderProp').option('First Name');
+	expect(repeater('tr.contact', 'Contact List').column('contact.last')).
+          toEqual(["Cooper", "Payne", "Cooper", "Brown"]);		
+  });
+  
+  it('should correctly construct the E-Mail as "len.payne@lambtoncollege.ca"', function() {
+	input('query').enter('Len');
+	expect(element('tr.contact td.email').text()).toMatch(/^len\.payne@lambtoncollege\.ca$/i);          
+  });
+  
+  it('should correctly construct the Phone Number as "519-542-7751 ext. 3418"', function() {
+	input('query').enter('Len');
+	expect(element('tr.contact td.phone').text()).toMatch(/^519-542-7751 ext\. 3418$/i);          
+  });
+  
 });
