@@ -1,0 +1,10 @@
+{ 
+	"first" : "Shannon", 
+	"last" : "Smith", 
+	"extension" : "3418" , 
+	"id" : "shannon", 
+	"imageUrl" : "img/shannon.png",
+	"office" : "N203B",
+	"department" : "School of Technology",
+	"manager" : "Dean of Technology"
+}

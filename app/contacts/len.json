@@ -1,0 +1,10 @@
+{ 
+	"first" : "Len", 
+	"last" : "Payne", 
+	"extension" : "3418" , 
+	"id" : "len", 
+	"imageUrl" : "img/len.png",
+	"office" : "N203B",
+	"department" : "School of Technology",
+	"manager" : "Dean of Technology"
+}

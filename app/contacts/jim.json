@@ -1,0 +1,10 @@
+{ 
+	"first" : "Jim", 
+	"last" : "Cooper", 
+	"extension" : "3219" , 
+	"id" : "jim", 
+	"imageUrl" : "img/jim.png",
+	"office" : "N203A",
+	"department" : "School of Technology",
+	"manager" : "Dean of Technology"
+}

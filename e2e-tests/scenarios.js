@@ -1,9 +1,9 @@
 'use strict';
 
-/* Assignment #1 End-to-End Testing
+/* Assignment #2 End-to-End Testing
  * Prepared By: Len Payne
  * For: CPD-3262
- * 2014/01/07
+ * 2014/01/21
  */
 /* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
 
@@ -13,8 +13,8 @@ describe('Contact List App', function() {
     browser().navigateTo('app/index.html');
   });
 
-  it('should have four tr elements with the class "contact"', function() {
-	expect(repeater('tr.contact').count()).toBe(4);
+  it('should have six tr elements with the class "contact"', function() {
+	expect(repeater('tr.contact').count()).toBe(6);
   });
   
   it('should filter on Cooper to only two results', function() {
@@ -22,16 +22,11 @@ describe('Contact List App', function() {
     expect(repeater('tr.contact').count()).toBe(2);
   });
 
-  it('should filter on o to only three results', function() {
-	input('query').enter('o');
-    expect(repeater('tr.contact').count()).toBe(3);
-  });
-
   it('should order correctly by Extension', function() {
 	input('query').enter('33');
 	select('orderProp').option('Extension');
 	expect(repeater('tr.contact', 'Contact List').column('contact.first')).
-          toEqual(["Liane", "Rick"]);
+          toEqual(["Liane", "Rick", "Samantha"]);
   });
 
   it('should order correctly by First Name', function() {
@@ -48,26 +43,29 @@ describe('Contact List App', function() {
           toEqual(["Liane", "Len"]);
   });
 
-  it('should include all the original first names', function() {
-	select('orderProp').option('First Name');
-	expect(repeater('tr.contact', 'Contact List').column('contact.first')).
-          toEqual(["Jim", "Len", "Liane", "Rick"]);		
+  it('should render contact-specific links', function() {
+    input('query').enter('Len');
+	element('.contact td.first a').click();
+	expect(browser().location().url()).toBe('/contacts/len');
   });
   
-  it('should include all the original last names', function() {
-	select('orderProp').option('First Name');
-	expect(repeater('tr.contact', 'Contact List').column('contact.last')).
-          toEqual(["Cooper", "Payne", "Cooper", "Brown"]);		
+  it('should re-direct index.html to index.html#/contacts', function() {
+	browser().navigateTo('app/index.html');
+	expect(browser().location().url()).toBe('/contacts');
+  });
+});
+describe('Contact List Detail View', function() {
+  beforeEach(function() {
+    browser().navigateTo('app/index.html#/contacts/len');
   });
   
-  it('should correctly construct the E-Mail as "len.payne@lambtoncollege.ca"', function() {
-	input('query').enter('Len');
-	expect(element('tr.contact td.email').text()).toMatch(/^len\.payne@lambtoncollege\.ca$/i);          
+  it('should display Len page properly', function() {
+    expect(binding('contact.first')).toBe('Len');
+	expect(binding('contact.last')).toBe('Payne');
   });
   
-  it('should correctly construct the Phone Number as "519-542-7751 ext. 3418"', function() {
-	input('query').enter('Len');
-	expect(element('tr.contact td.phone').text()).toMatch(/^519-542-7751 ext\. 3418$/i);          
+  it('should have a link back to the contact list at the top of the page', function() {
+    element('a:first').click();
+	expect(browser().location().url()).toBe('/contacts');
   });
-  
 });

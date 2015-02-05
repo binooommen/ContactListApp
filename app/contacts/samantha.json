@@ -1,0 +1,10 @@
+{ 
+	"first" : "Samantha", 
+	"last" : "Spencer", 
+	"extension" : "3385" , 
+	"id" : "samantha", 
+	"imageUrl" : "img/samantha.png",
+	"office" : "D100",
+	"department" : "Information Technology",
+	"manager" : "IT Manager"
+}

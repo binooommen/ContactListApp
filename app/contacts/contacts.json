@@ -1,0 +1,8 @@
+[
+	{ "first" : "Jim", "last" : "Cooper", "extension" : "3219" , "id" : "jim", "imageUrl" : "img/jim.png" },
+	{ "first" : "Liane", "last" : "Cooper", "extension" : "3336" , "id" : "liane", "imageUrl" : "img/liane.png" },
+	{ "first" : "Rick", "last" : "Brown", "extension" : "3376" , "id" : "rick", "imageUrl" : "img/rick.png" },
+	{ "first" : "Len", "last" : "Payne", "extension" : "3418" , "id" : "len", "imageUrl" : "img/len.png" },
+	{ "first" : "Shannon", "last" : "Smith", "extension" : "3418" , "id" : "shannon", "imageUrl" : "img/shannon.png" },
+	{ "first" : "Samantha", "last" : "Spencer", "extension" : "3385" , "id" : "samantha", "imageUrl" : "img/samantha.png" }
+]

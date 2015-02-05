@@ -1,0 +1,28 @@
+
+<div style="margin-left: 650px;padding: 20px 20px 20px 20px;">
+<h1>{{contact.first}} {{contact.last}}</h1>
+<a href="#/contacts/{{contact.id}}"><img ng-src="{{contact.imageUrl}}"/></a>
+<br>
+<dl>
+	<dt>Phone</dt>
+	<dd>{{'519-542-7751 ext.' + contact.extension}}</dd>
+
+	<dt>Office</dt>
+	<dd>{{contact.office}}</dd>
+
+	<dt>Department</dt>
+	<dd>{{contact.department}}</dd>
+
+	<dt>Manager</dt>
+	<dd>{{contact.manager}}</dd>
+
+	<dt>Email</dt>
+	<dd>
+		<a href="mailto:{{contact.first+'.'+contact.last+'@lambtoncollege.ca'}}">
+			<img src="./img/email.png" width="75" height="75"><br> Email {{contact.first}}
+		</a>
+	</dd>
+</dl>
+  
+</div>
+  

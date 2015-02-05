@@ -1,0 +1,10 @@
+{ 
+	"first" : "Liane", 
+	"last" : "Cooper", 
+	"extension" : "3336" , 
+	"id" : "liane", 
+	"imageUrl" : "img/liane.png",
+	"office" : "E202-21",
+	"department" : "School of Business",
+	"manager" : "Dean of Business"
+}
